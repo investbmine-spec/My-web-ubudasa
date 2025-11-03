@@ -1,2 +1,2 @@
-# My-web-ubudasa
+# My-shop-ubudasa.com
 You home shop
