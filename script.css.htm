@@ -1,0 +1,310 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UBUDASA Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>UBUDASA Shop</h1>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('products')">Products</button>
+      <button onclick="showSection('about')">About</button>
+      <button onclick="showSection('contact')">Contact</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="active">
+      <h2>Welcome to UBUDASA Shop</h2>
+      <p>Affordable and trusted products for students and home users.</p>
+    </section>
+
+    <section id="products">
+      <h2>Products</h2>
+      <div class="product-grid">
+        <div class="product">
+          <h3>Kettle</h3>
+          <p>Simple and durable kettle for daily use.</p>
+          <button onclick="addToCart('Kettle')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Iron</h3>
+          <p>Lightweight and effective for students.</p>
+          <button onclick="addToCart('Iron')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Charger</h3>
+          <p>Reliable charger for phones and tablets.</p>
+          <button onclick="addToCart('Charger')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Kettle 2</h3>
+          <p>Compact and easy to store kettle.</p>
+          <button onclick="addToCart('Kettle 2')">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>UBUDASA Shop provides essential non-food products with a 10% upfront payment system via MoMo code <b>603629</b>.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>WhatsApp us directly at <b>0785485314</b>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 UBUDASA Shop — All Rights Reserved.</p>
+  </footer>
+
+  <!-- Floating Cart -->
+  <div id="cart-panel">
+    <h3>Cart</h3>
+    <ul id="cart-items"></ul>
+    <p>Total Items: <span id="cart-count">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+    <button onclick="closeCart()">Close</button>
+  </div>
+
+  <button id="cart-toggle" onclick="toggleCart()">🛒</button>
+
+  <script src="script.js"></script>
+</body>
+</html><style>body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #1c1c1c;
+  transition: background 0.3s;
+}
+
+.header {
+  background: #E30613;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.header nav button {
+  background: #fff;
+  color: #E30613;
+  border: none;
+  margin: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.header nav button:hover {
+  background: #E30613;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+main {
+  padding: 25px;
+  text-align: center;
+}
+
+section {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s;
+}
+
+section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product {
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+.product button {
+  background: #E30613;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.3s;
+}
+
+.product button:hover {
+  opacity: 0.85;
+}
+
+footer {
+  background: #E30613;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  margin-top: 20px;
+}
+
+/* Floating Cart */
+#cart-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #E30613;
+  color: #fff;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+#cart-panel {
+  position: fixed;
+  bottom: 80px;
+  right: -300px;
+  width: 260px;
+  background: #fff;
+  border: 1px solid #E30613;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: right 0.4s ease-in-out;
+}
+
+#cart-panel.show {
+  right: 20px;
+}
+
+#cart-panel h3 {
+  margin-top: 0;
+  color: #E30613;
+}
+
+#cart-panel ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+#cart-panel ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#cart-panel button {
+  background: #E30613;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+#cart-panel button:hover {
+  opacity: 0.85;
+}</style><script>let cart = {};
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+  const section = document.getElementById(id);
+  section.classList.add('active');
+}
+
+function addToCart(productName) {
+  if (cart[productName]) {
+    cart[productName]++;
+  } else {
+    cart[productName] = 1;
+  }
+  updateCartPanel();
+  showCart(); // Automatically slide in cart when first product added
+}
+
+function updateCartPanel() {
+  const cartItems = document.getElementById('cart-items');
+  const cartCount = document.getElementById('cart-count');
+  cartItems.innerHTML = '';
+  let totalItems = 0;
+
+  for (let item in cart) {
+    totalItems += cart[item];
+    const li = document.createElement('li');
+    li.textContent = `${item} × ${cart[item]}`;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => removeFromCart(item);
+
+    li.appendChild(removeBtn);
+    cartItems.appendChild(li);
+  }
+  cartCount.textContent = totalItems;
+}
+
+function removeFromCart(item) {
+  delete cart[item];
+  updateCartPanel();
+}
+
+function toggleCart() {
+  document.getElementById('cart-panel').classList.toggle('show');
+}
+
+function closeCart() {
+  document.getElementById('cart-panel').classList.remove('show');
+}
+
+function showCart() {
+  document.getElementById('cart-panel').classList.add('show');
+}
+
+function checkout() {
+  if (Object.keys(cart).length === 0) {
+    alert('Your cart is empty!');
+    return;
+  }
+  alert('Proceed to pay 10% upfront via MoMo code 603629 for all items in cart.');
+}</script>

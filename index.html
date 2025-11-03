@@ -1,0 +1,81 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UBUDASA Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>UBUDASA Shop</h1>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('products')">Products</button>
+      <button onclick="showSection('about')">About</button>
+      <button onclick="showSection('contact')">Contact</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="active">
+      <h2>Welcome to UBUDASA Shop</h2>
+      <p>Affordable and trusted products for students and home users.</p>
+    </section>
+
+    <section id="products">
+      <h2>Products</h2>
+      <div class="product-grid">
+        <div class="product">
+          <h3>Kettle</h3>
+          <p>Simple and durable kettle for daily use.</p>
+          <button onclick="addToCart('Kettle')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Iron</h3>
+          <p>Lightweight and effective for students.</p>
+          <button onclick="addToCart('Iron')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Charger</h3>
+          <p>Reliable charger for phones and tablets.</p>
+          <button onclick="addToCart('Charger')">Add to Cart</button>
+        </div>
+        <div class="product">
+          <h3>Kettle 2</h3>
+          <p>Compact and easy to store kettle.</p>
+          <button onclick="addToCart('Kettle 2')">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>UBUDASA Shop provides essential non-food products with a 10% upfront payment system via MoMo code <b>603629</b>.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>WhatsApp us directly at <b>0785485314</b>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 UBUDASA Shop — All Rights Reserved.</p>
+  </footer>
+
+  <!-- Floating Cart -->
+  <div id="cart-panel">
+    <h3>Cart</h3>
+    <ul id="cart-items"></ul>
+    <p>Total Items: <span id="cart-count">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+    <button onclick="closeCart()">Close</button>
+  </div>
+
+  <button id="cart-toggle" onclick="toggleCart()">🛒</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
